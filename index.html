@@ -3,339 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海斯 - 文章标题</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fafafa;
-        }
-
-        /* 容器 */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* 头部导航 */
-        .header {
-            background-color: #fff;
-            border-bottom: 1px solid #eaecef;
-            padding: 20px 0;
-            margin-bottom: 40px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .nav {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #24292e;
-            text-decoration: none;
-        }
-
-        .logo:hover {
-            color: #0366d6;
-        }
-
-        .nav-links a {
-            color: #586069;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #0366d6;
-        }
-
-        /* 文章内容 */
-        .article {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 40px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-
-        .article h1 {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
-            color: #24292e;
-            line-height: 1.3;
-        }
-
-        .article-meta {
-            color: #586069;
-            font-size: 0.9rem;
-            margin-bottom: 32px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #eaecef;
-        }
-
-        .article-meta span {
-            margin-right: 16px;
-        }
-
-        .article-content {
-            font-size: 1.05rem;
-            color: #24292e;
-        }
-
-        .article-content p {
-            margin-bottom: 1.5em;
-        }
-
-        .article-content h2 {
-            font-size: 1.5rem;
-            margin: 1.5em 0 0.75em;
-            padding-bottom: 0.3em;
-            border-bottom: 1px solid #eaecef;
-        }
-
-        .article-content h3 {
-            font-size: 1.25rem;
-            margin: 1.25em 0 0.5em;
-        }
-
-        .article-content code {
-            background-color: #f6f8fa;
-            padding: 0.2em 0.4em;
-            border-radius: 3px;
-            font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
-            font-size: 0.9em;
-        }
-
-        .article-content pre {
-            background-color: #f6f8fa;
-            padding: 16px;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin: 1em 0;
-        }
-
-        .article-content pre code {
-            background-color: transparent;
-            padding: 0;
-        }
-
-        .article-content blockquote {
-            border-left: 4px solid #dfe2e5;
-            padding-left: 1em;
-            color: #6a737d;
-            margin: 1em 0;
-        }
-
-        .article-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
-
-        /* 评论区容器 */
-        .comments-section {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 32px 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .comments-title {
-            font-size: 1.5rem;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #eaecef;
-            color: #24292e;
-        }
-
-        /* 评论区加载提示 */
-        .giscus {
-            margin-top: 20px;
-        }
-
-        /* 页脚 */
-        .footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #586069;
-            font-size: 0.85rem;
-            border-top: 1px solid #eaecef;
-            background-color: #fff;
-            margin-top: 40px;
-        }
-
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .article {
-                padding: 24px;
-            }
-            
-            .comments-section {
-                padding: 24px;
-            }
-            
-            .article h1 {
-                font-size: 1.8rem;
-            }
-            
-            .nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-            
-            .nav-links a {
-                margin: 0 10px;
-            }
-        }
-
-        /* 暗色模式（根据系统自动切换） */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #0d1117;
-                color: #c9d1d9;
-            }
-            
-            .header,
-            .article,
-            .comments-section,
-            .footer {
-                background-color: #161b22;
-                border-color: #30363d;
-            }
-            
-            .article h1,
-            .comments-title {
-                color: #c9d1d9;
-            }
-            
-            .article-meta {
-                color: #8b949e;
-                border-bottom-color: #30363d;
-            }
-            
-            .article-content code {
-                background-color: #2d333b;
-            }
-            
-            .article-content pre {
-                background-color: #2d333b;
-            }
-            
-            .nav-links a {
-                color: #8b949e;
-            }
-            
-            .nav-links a:hover {
-                color: #58a6ff;
-            }
-            
-            .logo {
-                color: #c9d1d9;
-            }
-            
-            .logo:hover {
-                color: #58a6ff;
-            }
-        }
-    </style>
+    <title>海斯分享 - 游戏教程|软件教程|应用教程|网站分享</title>
+    <meta name="description" content="海斯分享 - 提供游戏教程、软件教程、应用教程、网站分享，包含百度云盘、夸克网盘资源下载">
+    <meta name="keywords" content="游戏教程,软件教程,应用教程,网站分享,百度云盘,夸克网盘">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header class="header">
-        <div class="nav">
-            <a href="/" class="logo">📝 我的博客</a>
-            <div class="nav-links">
-                <a href="/">首页</a>
-                <a href="/about.html">关于</a>
-                <a href="https://github.com/haisi-ai" target="_blank">GitHub</a>
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="/">🌊 海斯分享</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/index.html" class="active">首页</a></li>
+                <li><a href="/category.html?cat=game">🎮 游戏教程</a></li>
+                <li><a href="/category.html?cat=software">💻 软件教程</a></li>
+                <li><a href="/category.html?cat=app">📱 应用教程</a></li>
+                <li><a href="/category.html?cat=website">🌐 网站分享</a></li>
+                <li><a href="/about.html">关于</a></li>
+            </ul>
+            <div class="user-info">
+                <a href="https://github.com/haisi-ai" target="_blank" class="github-link">
+                    <svg height="20" viewBox="0 0 16 16" width="20"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                    GitHub
+                </a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <!-- 文章内容 -->
-        <article class="article">
-            <h1>使用 Giscus 为 GitHub Pages 添加评论系统</h1>
-            <div class="article-meta">
-                <span>📅 2026-03-25</span>
-                <span>🏷️ 技术分享</span>
-                <span>👤 haisi-ai</span>
-            </div>
-            <div class="article-content">
-                <p>Giscus 是一个基于 GitHub Discussions 的评论系统，非常适合部署在 GitHub Pages 上的静态网站。</p>
-                
-                <h2>为什么选择 Giscus？</h2>
-                <p>Giscus 完全免费，无需服务器，所有评论数据都存储在 GitHub 仓库的 Discussions 中。用户使用 GitHub 账号登录即可评论，支持 Markdown、代码高亮、@提及等 GitHub 原生功能。</p>
-                
-                <h2>如何配置？</h2>
-                <p>只需要在 GitHub 仓库中开启 Discussions 功能，安装 Giscus App，然后将提供的脚本代码嵌入到页面中即可。整个过程不超过 5 分钟。</p>
-                
-                <h2>代码示例</h2>
-                <pre><code>&lt;script src="https://giscus.app/client.js"
-    data-repo="haisi-ai/blogs"
-    data-repo-id="R_kgDORwBnLg"
-    data-category="Announcements"
-    data-category-id="DIC_kwDORwBnLs4C5OQ7"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="preferred_color_scheme"
-    data-lang="zh-CN"
-    crossorigin="anonymous"
-    async&gt;
-&lt;/script&gt;</code></pre>
-                
-                <p>现在，你可以在下方评论区留言测试了！👇</p>
-            </div>
-        </article>
-
-        <!-- 评论区 -->
-        <div class="comments-section">
-            <h2 class="comments-title">💬 评论与讨论</h2>
-            <div class="giscus">
-                <!-- Giscus 评论组件 -->
-                <script src="https://giscus.app/client.js"
-                    data-repo="haisi-ai/blogs"
-                    data-repo-id="R_kgDORwBnLg"
-                    data-category="Announcements"
-                    data-category-id="DIC_kwDORwBnLs4C5OQ7"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="bottom"
-                    data-theme="preferred_color_scheme"
-                    data-lang="zh-CN"
-                    crossorigin="anonymous"
-                    async>
-                </script>
-            </div>
-        </div>
+    <div class="category-bar">
+        <ul class="category-list">
+            <li><a href="/index.html" class="category-tag active" data-cat="all">🏠 全部</a></li>
+            <li><a href="/category.html?cat=game" class="category-tag" data-cat="game">🎮 游戏教程</a></li>
+            <li><a href="/category.html?cat=software" class="category-tag" data-cat="software">💻 软件教程</a></li>
+            <li><a href="/category.html?cat=app" class="category-tag" data-cat="app">📱 应用教程</a></li>
+            <li><a href="/category.html?cat=website" class="category-tag" data-cat="website">🌐 网站分享</a></li>
+        </ul>
     </div>
 
+    <main class="container">
+        <div class="posts-grid" id="posts-container">
+            <div style="text-align:center; padding:3rem;">加载中...</div>
+        </div>
+    </main>
+
     <footer class="footer">
-        <p>© 2026 haisi-ai | 基于 GitHub Pages & Giscus 构建</p>
-        <p style="margin-top: 8px; font-size: 0.8rem;">
-            <a href="https://github.com/haisi-ai/blogs" target="_blank" style="color: #586069; text-decoration: none;">GitHub 仓库</a>
-        </p>
+        <p>© 2026 海斯分享 | 邮箱: haisi@mail.com | GitHub: haisi-ai</p>
+        <p style="margin-top: 0.5rem;">本站资源仅供学习交流，请于下载后24小时内删除</p>
     </footer>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>
