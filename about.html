@@ -1,45 +1,194 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-    <main class="about-card">
-        <h1>🌊 关于海斯分享</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - 海斯分享</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 关于页面额外样式 - 确保完美居中 */
+        .about-page {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 20px;
+        }
         
-        <h2>👤 关于我</h2>
-        <p>大家好，我是 <strong>海斯</strong>，一个热爱分享的技术爱好者。这个网站是我个人创建的资源分享平台，主要分享我收集和整理的各类资源。</p>
+        .about-card {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: var(--bg-white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
         
-        <h2>📂 网站内容分类</h2>
-        <ul>
-            <li><strong>📖 教程</strong> - 各种使用教程，包括软件教程、游戏攻略、应用使用方法等</li>
-            <li><strong>📦 应用</strong> - 各种游戏、软件、系统分享，可直接下载的资源包</li>
-            <li><strong>📚 其他</strong> - 各类资料分享，包括图片、小说、视频、网站导航等</li>
-        </ul>
+        .about-card h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            text-align: center;
+        }
         
-        <h2>📦 资源下载方式</h2>
-        <p>本站提供的资源主要通过以下网盘分享：</p>
-        <ul>
-            <li><strong>百度云盘</strong> - 主要资源存储，部分资源需要提取码</li>
-            <li><strong>夸克网盘</strong> - 备用下载链接，速度较快</li>
-            <li><strong>GitHub</strong> - 开源项目代码或预览</li>
-            <li><strong>QQ群</strong> - 群文件下载（如有）</li>
-        </ul>
+        .about-card h2 {
+            font-size: 1.3rem;
+            margin: 1.8rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-color);
+        }
         
-        <h2>📧 联系我</h2>
-        <div class="contact-info">
-            <p>📧 邮箱：<a href="mailto:haisi@mail.com">haisi@mail.com</a></p>
-            <p>🐙 GitHub：<a href="https://github.com/haisi-ai" target="_blank">@haisi-ai</a></p>
-            <p>🌐 域名：<a href="https://haisi.cc" target="_blank">haisi.cc</a></p>
-            <p>💬 评论：可在每篇文章下方评论区留言，我会及时回复</p>
+        .about-card h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        .about-card p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .about-card ul {
+            margin: 0.8rem 0 1rem 1.8rem;
+            color: var(--text-color);
+        }
+        
+        .about-card li {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+        
+        .about-card strong {
+            color: var(--primary-color);
+        }
+        
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        
+        .contact-info p {
+            margin: 0.6rem 0;
+        }
+        
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        hr {
+            margin: 2rem 0;
+            border: none;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .thank-you {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        /* 暗色模式适配 */
+        @media (prefers-color-scheme: dark) {
+            .contact-info {
+                background-color: #2d333b;
+            }
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .about-card {
+                padding: 1.5rem;
+            }
+            
+            .about-card h1 {
+                font-size: 1.6rem;
+            }
+            
+            .about-card h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="index.html">🌊 海斯分享</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="index.html#tutorial">📖 教程</a></li>
+                <li><a href="index.html#app">📦 应用</a></li>
+                <li><a href="index.html#other">📚 其他</a></li>
+                <li><a href="about.html" class="active">👤 关于</a></li>
+            </ul>
+            <div class="user-info">
+                <a href="https://github.com/haisi-ai" target="_blank" class="github-link">
+                    <svg height="20" viewBox="0 0 16 16" width="20" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
         </div>
-        
-        <h2>⚠️ 免责声明</h2>
-        <p>本站所有资源均来源于网络，仅供学习交流使用，请于下载后24小时内删除。如有侵犯您的权益，请联系删除。使用本站资源产生的任何问题，本站不承担任何责任。</p>
-        
-        <hr style="margin: 2rem 0;">
-        <p style="text-align: center;">© 2026 海斯分享 | 感谢支持 🙏</p>
-    </main>
+    </header>
+
+    <div class="about-page">
+        <main class="about-card">
+            <h1>🌊 关于海斯分享</h1>
+            
+            <h2>👤 关于我</h2>
+            <p>大家好，我是 <strong>海斯</strong>，一个热爱分享的技术爱好者。这个网站是我个人创建的资源分享平台，主要分享我收集和整理的各类资源。</p>
+            
+            <h2>📂 网站内容分类</h2>
+            <ul>
+                <li><strong>📖 教程</strong> - 各种使用教程，包括软件教程、游戏攻略、应用使用方法等</li>
+                <li><strong>📦 应用</strong> - 各种游戏、软件、系统分享，可直接下载的资源包</li>
+                <li><strong>📚 其他</strong> - 各类资料分享，包括图片、小说、视频、网站导航等</li>
+            </ul>
+            
+            <h2>📦 资源下载方式</h2>
+            <p>本站提供的资源主要通过以下网盘分享：</p>
+            <ul>
+                <li><strong>百度云盘</strong> - 主要资源存储，部分资源需要提取码</li>
+                <li><strong>夸克网盘</strong> - 备用下载链接，速度较快</li>
+                <li><strong>GitHub</strong> - 开源项目代码或预览</li>
+                <li><strong>QQ群</strong> - 群文件下载（如有）</li>
+            </ul>
+            
+            <h2>📧 联系我</h2>
+            <div class="contact-info">
+                <p>📧 邮箱：<a href="mailto:haisi@mail.com">haisi@mail.com</a></p>
+                <p>🐙 GitHub：<a href="https://github.com/haisi-ai" target="_blank">@haisi-ai</a></p>
+                <p>🌐 域名：<a href="https://haisi.cc" target="_blank">haisi.cc</a></p>
+                <p>💬 评论：可在每篇文章下方评论区留言，我会及时回复</p>
+            </div>
+            
+            <h2>⚠️ 免责声明</h2>
+            <p>本站所有资源均来源于网络，仅供学习交流使用，请于下载后24小时内删除。如有侵犯您的权益，请联系删除。使用本站资源产生的任何问题，本站不承担任何责任。</p>
+            
+            <hr>
+            <div class="thank-you">
+                <p>© 2026 海斯分享 | 感谢支持 🙏</p>
+            </div>
+        </main>
+    </div>
 
     <footer class="footer">
         <p>© 2026 海斯分享 | 邮箱: haisi@mail.com | GitHub: haisi-ai | 域名: haisi.cc</p>
-        <p>本站资源仅供学习交流，请于下载后24小时内删除</p>
+        <p style="margin-top: 0.5rem;">本站资源仅供学习交流，请于下载后24小时内删除</p>
     </footer>
 </body>
 </html>
