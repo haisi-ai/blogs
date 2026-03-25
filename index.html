@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>海斯分享 - 游戏教程|软件教程|应用教程|网站分享</title>
-    <meta name="description" content="海斯分享 - 提供游戏教程、软件教程、应用教程、网站分享，包含百度云盘、夸克网盘资源下载">
-    <meta name="keywords" content="游戏教程,软件教程,应用教程,网站分享,百度云盘,夸克网盘">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="description" content="海斯分享 - 提供游戏教程、软件教程、应用教程、网站分享">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header class="header">
         <div class="nav-container">
             <div class="logo">
-                <h1><a href="/">🌊 海斯分享</a></h1>
+                <h1><a href="index.html">🌊 海斯分享</a></h1>
             </div>
             <ul class="nav-menu">
-                <li><a href="/index.html" class="active">首页</a></li>
-                <li><a href="/category.html?cat=game">🎮 游戏教程</a></li>
-                <li><a href="/category.html?cat=software">💻 软件教程</a></li>
-                <li><a href="/category.html?cat=app">📱 应用教程</a></li>
-                <li><a href="/category.html?cat=website">🌐 网站分享</a></li>
-                <li><a href="/about.html">关于</a></li>
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="#game">🎮 游戏教程</a></li>
+                <li><a href="#software">💻 软件教程</a></li>
+                <li><a href="#app">📱 应用教程</a></li>
+                <li><a href="#website">🌐 网站分享</a></li>
+                <li><a href="about.html">关于</a></li>
             </ul>
             <div class="user-info">
                 <a href="https://github.com/haisi-ai" target="_blank" class="github-link">
@@ -33,25 +32,119 @@
 
     <div class="category-bar">
         <ul class="category-list">
-            <li><a href="/index.html" class="category-tag active" data-cat="all">🏠 全部</a></li>
-            <li><a href="/category.html?cat=game" class="category-tag" data-cat="game">🎮 游戏教程</a></li>
-            <li><a href="/category.html?cat=software" class="category-tag" data-cat="software">💻 软件教程</a></li>
-            <li><a href="/category.html?cat=app" class="category-tag" data-cat="app">📱 应用教程</a></li>
-            <li><a href="/category.html?cat=website" class="category-tag" data-cat="website">🌐 网站分享</a></li>
+            <li><a href="index.html" class="category-tag">🏠 全部</a></li>
+            <li><a href="#game" class="category-tag">🎮 游戏教程</a></li>
+            <li><a href="#software" class="category-tag">💻 软件教程</a></li>
+            <li><a href="#app" class="category-tag">📱 应用教程</a></li>
+            <li><a href="#website" class="category-tag">🌐 网站分享</a></li>
         </ul>
     </div>
 
     <main class="container">
-        <div class="posts-grid" id="posts-container">
-            <div style="text-align:center; padding:3rem;">加载中...</div>
-        </div>
+        <!-- 游戏教程区域 -->
+        <section id="game">
+            <h2 style="margin: 1rem 0 1.5rem;">🎮 游戏教程</h2>
+            <div class="posts-grid">
+                <a href="game/cyberpunk.html" class="post-card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🎮</div>
+                    <div class="card-content">
+                        <span class="card-category">游戏教程</span>
+                        <h3 class="card-title">《赛博朋克2077》最新DLC完整安装教程</h3>
+                        <p class="card-desc">包含全部DLC内容，附百度云盘下载链接及安装说明</p>
+                        <div class="card-meta">
+                            <span>📅 2026-03-25</span>
+                            <span>👤 海斯</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="game/elden-ring.html" class="post-card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">⚔️</div>
+                    <div class="card-content">
+                        <span class="card-category">游戏教程</span>
+                        <h3 class="card-title">《艾尔登法环》全DLC整合包</h3>
+                        <p class="card-desc">黄金树幽影DLC完整版，附修改器</p>
+                        <div class="card-meta">
+                            <span>📅 2026-03-21</span>
+                            <span>👤 海斯</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 软件教程区域 -->
+        <section id="software">
+            <h2 style="margin: 2rem 0 1.5rem;">💻 软件教程</h2>
+            <div class="posts-grid">
+                <a href="software/photoshop.html" class="post-card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🎨</div>
+                    <div class="card-content">
+                        <span class="card-category">软件教程</span>
+                        <h3 class="card-title">Adobe Photoshop 2026 绿色精简版下载</h3>
+                        <p class="card-desc">免安装，解压即用，包含全部AI功能</p>
+                        <div class="card-meta">
+                            <span>📅 2026-03-24</span>
+                            <span>👤 海斯</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="software/premiere-plugins.html" class="post-card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🎬</div>
+                    <div class="card-content">
+                        <span class="card-category">软件教程</span>
+                        <h3 class="card-title">影视后期必备插件合集</h3>
+                        <p class="card-desc">PR/AE插件大礼包，包含转场、特效、调色插件</p>
+                        <div class="card-meta">
+                            <span>📅 2026-03-20</span>
+                            <span>👤 海斯</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 应用教程区域 -->
+        <section id="app">
+            <h2 style="margin: 2rem 0 1.5rem;">📱 应用教程</h2>
+            <div class="posts-grid">
+                <a href="app/spotify.html" class="post-card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #1DB954 0%, #191414 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🎵</div>
+                    <div class="card-content">
+                        <span class="card-category">应用教程</span>
+                        <h3 class="card-title">Spotify 音乐下载器使用教程</h3>
+                        <p class="card-desc">免费下载Spotify高品质音乐，支持MP3格式</p>
+                        <div class="card-meta">
+                            <span>📅 2026-03-23</span>
+                            <span>👤 海斯</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 网站分享区域 -->
+        <section id="website">
+            <h2 style="margin: 2rem 0 1.5rem;">🌐 网站分享</h2>
+            <div class="posts-grid">
+                <a href="website/github-tools.html" class="post-card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #24292e 0%, #0366d6 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🐙</div>
+                    <div class="card-content">
+                        <span class="card-category">网站分享</span>
+                        <h3 class="card-title">GitHub加速访问工具推荐</h3>
+                        <p class="card-desc">解决GitHub访问慢、clone失败问题</p>
+                        <div class="card-meta">
+                            <span>📅 2026-03-22</span>
+                            <span>👤 海斯</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
         <p>© 2026 海斯分享 | 邮箱: haisi@mail.com | GitHub: haisi-ai</p>
         <p style="margin-top: 0.5rem;">本站资源仅供学习交流，请于下载后24小时内删除</p>
     </footer>
-
-    <script src="/js/main.js"></script>
 </body>
 </html>
