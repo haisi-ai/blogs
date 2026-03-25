@@ -20,28 +20,8 @@
 ## 📁 文件结构
 
 ```
-/
-├── index.html              # 首页（包含所有分类的卡片展示）
-├── about.html              # 关于页面
-├── css/
-│   └── style.css          # 全局样式文件
-├── tutorial/               # 📖 教程目录
-│   ├── photoshop-guide.html      # Photoshop教程
-│   ├── cyberpunk-guide.html      # 赛博朋克攻略
-│   └── spotify-downloader.html   # Spotify下载器教程
-├── app/                    # 📦 应用目录
-│   ├── photoshop-2026.html       # Photoshop绿色版
-│   ├── cyberpunk-2077.html       # 赛博朋克2077游戏
-│   ├── premiere-plugins.html     # PR/AE插件合集
-│   └── windows-tools.html        # Windows优化工具
-└── other/                  # 📚 其他资料目录
-    ├── wallpaper-4k.html          # 4K壁纸合集
-    ├── ebook-collection.html      # 电子书合集
-    ├── movie-resources.html       # 电影资源
-    ├── useful-websites.html       # 实用网站导航
-    ├── github-tools.html          # GitHub加速工具
-    └── manga-collection.html      # 漫画合集
-```
+<img width="436" height="455" alt="image" src="https://github.com/user-attachments/assets/fa6ede32-4fa4-4bf8-a25b-337c928c2cba" />
+
 
 ---
 
