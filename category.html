@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类 - 海斯分享</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="/">🌊 海斯分享</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/index.html">首页</a></li>
+                <li><a href="/category.html?cat=game">🎮 游戏教程</a></li>
+                <li><a href="/category.html?cat=software">💻 软件教程</a></li>
+                <li><a href="/category.html?cat=app">📱 应用教程</a></li>
+                <li><a href="/category.html?cat=website">🌐 网站分享</a></li>
+                <li><a href="/about.html">关于</a></li>
+            </ul>
+            <div class="user-info">
+                <a href="https://github.com/haisi-ai" target="_blank" class="github-link">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="category-bar">
+        <ul class="category-list">
+            <li><a href="/index.html" class="category-tag">🏠 全部</a></li>
+            <li><a href="/category.html?cat=game" class="category-tag" data-cat="game">🎮 游戏教程</a></li>
+            <li><a href="/category.html?cat=software" class="category-tag" data-cat="software">💻 软件教程</a></li>
+            <li><a href="/category.html?cat=app" class="category-tag" data-cat="app">📱 应用教程</a></li>
+            <li><a href="/category.html?cat=website" class="category-tag" data-cat="website">🌐 网站分享</a></li>
+        </ul>
+    </div>
+
+    <main class="container">
+        <h2 id="category-title" style="margin-bottom: 1.5rem;">全部文章</h2>
+        <div class="posts-grid" id="posts-container">
+            <div style="text-align:center; padding:3rem;">加载中...</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 海斯分享 | 邮箱: haisi@mail.com | GitHub: haisi-ai</p>
+        <p>本站资源仅供学习交流，请于下载后24小时内删除</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // 设置分类标题
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('cat');
+        const categoryNames = {
+            'game': '🎮 游戏教程',
+            'software': '💻 软件教程',
+            'app': '📱 应用教程',
+            'website': '🌐 网站分享'
+        };
+        if (category && categoryNames[category]) {
+            document.getElementById('category-title').textContent = categoryNames[category];
+        }
+    </script>
+</body>
+</html>
