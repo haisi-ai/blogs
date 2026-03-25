@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《汉末霸业》存档编辑完全指南 - 海斯分享</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 教程页面内嵌样式，用于优化代码块和表格显示 */
+        .article-content .code-block {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .article-content th, .article-content td {
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .article-content th {
+            background-color: var(--bg-color);
+            font-weight: 600;
+        }
+        .article-content tr:hover {
+            background-color: var(--bg-color);
+        }
+        @media (prefers-color-scheme: dark) {
+            .article-content .code-block {
+                background-color: #2d333b;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="../index.html">🌊 海斯分享</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../index.html#tutorial">📖 教程</a></li>
+                <li><a href="../index.html#app">📦 应用</a></li>
+                <li><a href="../index.html#other">📚 其他</a></li>
+                <li><a href="../about.html">👤 关于</a></li>
+            </ul>
+            <div class="user-info">
+                <a href="https://github.com/haisi-ai" target="_blank" class="github-link">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <article>
+            <div class="article-header">
+                <h1 class="article-title">《汉末霸业》存档编辑完全指南</h1>
+                <div class="article-meta">
+                    <span>📅 2024-09-23</span>
+                    <span>👤 海斯</span>
+                    <span>🏷️ 游戏教程 · 修改教程</span>
+                    <span>⏱️ 阅读约15分钟</span>
+                </div>
+            </div>
+            
+            <div class="article-content">
+                <p>《汉末霸业》是一款深受玩家喜爱的三国策略游戏。通过编辑存档文件，你可以定制专属的神兵利器，调整武将属性，获得更自由的游戏体验。本教程将带你从零开始，掌握存档编辑的核心技巧。</p>
+                
+                <h2>📁 一、存档文件结构解析</h2>
+                <p>游戏存档本质是一个文本文件，可以使用系统自带的记事本或专业代码编辑器（如VS Code）打开。其核心结构分为三部分：</p>
+                <ul>
+                    <li><strong>文件头部</strong>：包含游戏时间、君主、势力等全局信息。</li>
+                    <li><strong>核心数据区</strong>：包含城市、武将、装备等具体数据，是修改的重点。</li>
+                    <li><strong>文件尾部</strong>：包含校验信息，修改后通常无需改动。</li>
+                </ul>
+                
+                <h3>头部信息示例</h3>
+                <div class="code-block">
+                    &lt;header TYPE="HMBY" version="10" ... leadersurnamestr="海" leadernamestr="斯" citynamestr="洛阳" ... /&gt;
+                </div>
+                <p>你可以修改君主姓名（<code>leadersurnamestr</code>、<code>leadernamestr</code>）、所在城市（<code>citynamestr</code>）等参数。</p>
+                
+                <h2>⚙️ 二、装备修改核心教程</h2>
+                <p>所有装备信息都包含在 <code>&lt;gameiteminfo&gt;</code> 标签中。每个装备由 <code>&lt;gameitem&gt;</code> 标签定义，包含基础属性、特技、能力和技能四部分。</p>
+                
+                <h3>1. 装备模板结构</h3>
+                <div class="code-block">
+&lt;gameitem id="80023" frontid="0" modeid="80023" level="10" cost="900" price="18000" unique="1"&gt;
+    &lt;effect&gt;46,48,0,0,20,20,-1,-1&lt;/effect&gt;
+    &lt;ability&gt;0,1,2,-1,10,10,10,-1&lt;/ability&gt;
+    &lt;skill&gt;0,4,-1,-1&lt;/skill&gt;
+&lt;/gameitem&gt;
+                </div>
+                
+                <h4>基础属性参数：</h4>
+                <ul>
+                    <li><code>id</code>：装备的唯一ID（<a href="#itemid">参考全物品ID表</a>）</li>
+                    <li><code>level</code>：装备等级（1-12，12级专属）</li>
+                    <li><code>unique</code>：品质（0普通，1珍品，2神兵，1且等级12为专属）</li>
+                    <li><code>cost</code>/<code>price</code>：价值与价格</li>
+                </ul>
+                
+                <h4>特技（&lt;effect&gt;）编辑：</h4>
+                <p>格式为：<code>特技ID1, 数值1, 特技ID2, 数值2, ...</code>。最多可生效4个特技，部分特技无数值需用0补位。</p>
+                <p><strong>常用特技ID（部分）：</strong></p>
+                <ul>
+                    <li><strong>46,47,48</strong>：步兵/骑兵/弓兵伤害增加（数值为百分比）</li>
+                    <li><strong>29-32</strong>：冲锋/突击/火箭/挑衅几率</li>
+                    <li><strong>118</strong>：全兵种伤害增加</li>
+                    <li><strong>122</strong>：全兵种防御增加</li>
+                    <li><strong>88-106</strong>：习得各种技能（如冲锋、落石、闯阵）</li>
+                </ul>
+                <p>💡 <strong>示例</strong>：<code>&lt;effect&gt;118,50,29,30,88,0,-1,-1&lt;/effect&gt;</code> 表示全兵种伤害+50%，冲锋几率+30%，并习得冲锋技能。</p>
+                
+                <h4>能力（&lt;ability&gt;）编辑：</h4>
+                <p>格式为：<code>能力ID1, 数值1, 能力ID2, 数值2, ...</code>。最多可加成3项能力。</p>
+                <p><strong>常用能力ID：</strong></p>
+                <ul>
+                    <li>0,1,2：步兵、骑兵、弓兵适性（数值10为S+）</li>
+                    <li>8-11：武艺、勇猛、骑术、箭术</li>
+                    <li>13-14：谋略、计略</li>
+                    <li>24-25：人脉、仁德</li>
+                </ul>
+                <p>💡 <strong>示例</strong>：<code>&lt;ability&gt;0,12,8,20,13,15,-1,-1&lt;/ability&gt;</code> 表示步兵适性SS，武艺+20，谋略+15。</p>
+                
+                <h4>技能（&lt;skill&gt;）编辑：</h4>
+                <p>格式为：<code>技能ID1, 技能ID2, -1, -1</code>。最多可让装备附带2个技能。</p>
+                <p><strong>常用技能ID：</strong>0冲锋、1坚守、2突击、4齐射、5火箭、10火计、14伪报、15挑衅、17强行、18闯阵。</p>
+                <p>💡 <strong>示例</strong>：<code>&lt;skill&gt;0,5,-1,-1&lt;/skill&gt;</code> 表示装备附带“冲锋”和“火箭”技能。</p>
+                
+                <h2>🗺️ 三、其他实用修改</h2>
+                <p>除了装备，存档中还包含武将、城市等信息，你可以通过搜索武将姓名或城市名进行定位和修改。</p>
+                <ul>
+                    <li><strong>修改武将属性</strong>：搜索武将名称，附近可找到其五维、技能、忠诚度等数值。</li>
+                    <li><strong>调整城市资源</strong>：搜索城市名称，可修改钱粮、人口、城防等参数。</li>
+                    <li><strong>替换装备模型</strong>：通过修改 <code>modeid</code> 可以改变装备的外观模型（例如将普通剑的模型改为名剑“倚天”）。</li>
+                </ul>
+                
+                <h2>🛠️ 四、修改步骤与注意事项</h2>
+                <ol>
+                    <li><strong>备份存档</strong>：在修改前，务必将原存档文件复制一份，以防修改错误导致坏档。</li>
+                    <li><strong>定位文件</strong>：游戏存档通常位于 <code>Documents/Hanmo Game/Saves/</code> 或游戏安装目录下，文件名为 <code>Save.sav</code> 或类似。</li>
+                    <li><strong>使用编辑器</strong>：推荐使用 <strong>Notepad++</strong> 或 <strong>VS Code</strong> 打开存档文件，以获得更好的代码高亮和编辑体验。</li>
+                    <li><strong>保存与生效</strong>：修改后保存文件，重新进入游戏并加载该存档即可看到效果。</li>
+                </ol>
+                <p>⚠️ <strong>重要提示</strong>：过度修改可能会破坏游戏平衡和乐趣，请适度使用。此外，部分版本更新后存档结构可能微调，若修改无效请检查格式是否与教程一致。</p>
+                
+                <h2>🔗 附录：实用数据速查</h2>
+                <h3 id="itemid">部分全物品ID（装备类）</h3>
+                <table>
+                    <thead>
+                        <tr><th>ID范围</th><th>类型</th><th>示例</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>80001-80099</td><td>武器（刀、剑、枪等）</td><td>80023 鱼肠剑</td></tr>
+                        <tr><td>80100-80199</td><td>防具（甲、盾等）</td><td>80101 明光铠</td></tr>
+                        <tr><td>80200-80299</td><td>坐骑</td><td>80201 赤兔马</td></tr>
+                        <tr><td>80300-80399</td><td>宝物（书籍、饰品等）</td><td>80301 孙子兵法</td></tr>
+                    </tbody>
+                </table>
+                <p>（完整列表可参考游戏内“收藏”或玩家社区整理）</p>
+                
+                <h3>装备描述前缀ID</h3>
+                <p>在 <code>&lt;gameitem&gt;</code> 中可通过添加 <code>descid</code> 字段来为装备增加前缀，如 <code>descid="70023"</code> 会显示为“优质的”。</p>
+                <p><strong>常用前缀ID</strong>：70001改造的、70007笨重的、70010锋利的、70012罕见的、70019完美的、70022迅捷的、70023优质的。</p>
+            </div>
+            
+            <!-- 相关资源/下载链接（可选） -->
+            <div style="margin: 2rem 0; padding: 1rem; background-color: #f8f9fa; border-radius: 8px;">
+                <h3>🔗 相关资源</h3>
+                <div class="download-links">
+                    <a href="#" class="download-btn github">📦 全物品ID速查表下载</a>
+                    <a href="https://www.yuque.com/haisi/hmby" target="_blank" class="download-btn github">📖 语雀原文链接</a>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem;">⚠️ 本教程基于游戏早期版本，后续更新可能有所变化，请灵活参考。</p>
+            </div>
+            
+            <!-- Giscus评论区 -->
+            <div class="comments-section">
+                <h3>💬 评论区</h3>
+                <script src="https://giscus.app/client.js"
+                    data-repo="haisi-ai/blogs"
+                    data-repo-id="R_kgDORwBnLg"
+                    data-category="Announcements"
+                    data-category-id="DIC_kwDORwBnLs4C5OQ7"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="zh-CN"
+                    crossorigin="anonymous"
+                    async>
+                </script>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 DeepSeek | 深度求索 | 让AI触手可及</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://deepseek.com" target="_blank" style="color: var(--primary-color);">官网</a> | 
+            <a href="https://github.com/deepseek-ai" target="_blank" style="color: var(--primary-color);">GitHub</a> | 
+            邮箱: support@deepseek.com
+        </p>
+    </footer>
+</body>
+</html>
