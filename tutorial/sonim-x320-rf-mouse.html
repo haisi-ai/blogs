@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonim X320 RF鼠标 安装教程 - 海斯分享</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 教程页面内嵌样式，用于优化代码块、表格和图片显示 */
+        .article-content .code-block {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .article-content .cmd-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .article-content .cmd-block code {
+            color: #ce9178;
+        }
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .article-content th, .article-content td {
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .article-content th {
+            background-color: var(--bg-color);
+            font-weight: 600;
+        }
+        .article-content tr:hover {
+            background-color: var(--bg-color);
+        }
+        /* 图片预留样式 */
+        .article-content .screenshot {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .article-content .screenshot img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            background-color: #f0f0f0;
+        }
+        .article-content .screenshot .img-placeholder {
+            background-color: #e9ecef;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        .article-content .screenshot-grid {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .article-content .screenshot-grid .screenshot {
+            flex: 1;
+            min-width: 120px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .article-content .code-block {
+                background-color: #2d333b;
+            }
+            .article-content .cmd-block {
+                background-color: #0d1117;
+            }
+            .article-content .screenshot .img-placeholder {
+                background-color: #2d333b;
+                border-color: #444;
+            }
+        }
+
+        /* ========== 侧边栏目录样式 ========== */
+        .page-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .sidebar-toc {
+            width: 260px;
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 100px);
+            overflow-y: auto;
+            padding: 1rem 0.5rem;
+            margin-right: 1.5rem;
+            background-color: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            flex-shrink: 0;
+        }
+        .sidebar-toc h4 {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin: 0.3rem 0;
+        }
+        .toc-list a {
+            display: block;
+            padding: 0.4rem 0.8rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .toc-list a:hover {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+        }
+        .toc-list a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .toc-list .toc-h3 {
+            padding-left: 1.8rem;
+            font-size: 0.8rem;
+        }
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .toc-toggle-btn {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .toc-toggle-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        .toc-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 200;
+        }
+        .mobile-toc {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 260px;
+            height: 100%;
+            background-color: var(--bg-white);
+            z-index: 201;
+            transition: right 0.3s ease;
+            padding: 1rem;
+            overflow-y: auto;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+        }
+        .mobile-toc.open {
+            right: 0;
+        }
+        .mobile-toc h4 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .close-toc {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        @media (max-width: 900px) {
+            .sidebar-toc {
+                display: none;
+            }
+            .toc-toggle-btn {
+                display: flex;
+            }
+            .article-container {
+                margin: 1rem;
+            }
+        }
+        .article-content h2, .article-content h3 {
+            scroll-margin-top: 80px;
+        }
+        /* 警告/提示框样式 */
+        .article-content .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .article-content .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .article-content .info {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .article-content .note {
+                background-color: #2d2a1f;
+                border-left-color: #ffc107;
+            }
+            .article-content .warning {
+                background-color: #2d1f21;
+                border-left-color: #dc3545;
+            }
+            .article-content .info {
+                background-color: #1f2d2f;
+                border-left-color: #17a2b8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><a href="../index.html">🌊 海斯分享</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../index.html#tutorial">📖 教程</a></li>
+                <li><a href="../index.html#app">📦 应用</a></li>
+                <li><a href="../index.html#other">📚 其他</a></li>
+                <li><a href="../about.html">👤 关于</a></li>
+            </ul>
+            <div class="user-info">
+                <a href="https://github.com/haisi-ai" target="_blank" class="github-link">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-wrapper">
+        <!-- PC端侧边栏目录 -->
+        <aside class="sidebar-toc">
+            <h4>📑 本教程目录</h4>
+            <ul class="toc-list" id="toc-list">
+                <!-- 目录会由JS动态生成 -->
+            </ul>
+        </aside>
+
+        <!-- 主内容 -->
+        <main class="main-content">
+            <div class="article-container">
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">Sonim X320 RF鼠标 安装教程</h1>
+                        <div class="article-meta">
+                            <span>📅 2024-09-23</span>
+                            <span>👤 海斯</span>
+                            <span>🏷️ 教程 · 手机教程</span>
+                            <span>⏱️ 阅读约15分钟</span>
+                        </div>
+                    </div>
+
+                    <div class="article-content" id="article-content">
+                        <!-- ========== 设备说明 ========== -->
+                        <h2 id="device-info">📱 一、设备说明</h2>
+                        <p>本教程适用于 <strong>Sonim XP3 plus 5G</strong> 系列手机（型号包括 X320 / X3900 Plus 5G）</p>
+
+                        <h3>具体规格如下：</h3>
+                        <ul>
+                            <li><strong>操作系统</strong>：基于 AOSP 14 的 Sonim 专有系统</li>
+                            <li><strong>芯片组</strong>：高通 SM4450（2×2.0GHz + 6×1.8GHz）</li>
+                            <li><strong>内存/存储</strong>：4GB RAM + 32GB ROM，支持 microSD 扩展至 512GB</li>
+                            <li><strong>屏幕</strong>：2.95 英寸主屏（480×854）</li>
+                            <li><strong>连接</strong>：5G 全网通、Wi-Fi 5、蓝牙 5.0、USB Type-C</li>
+                            <li><strong>操作方式</strong>：物理数字键盘 + 可编程快捷键（<strong>不支持触屏</strong>）</li>
+                            <li><strong>坚固认证</strong>：IP68、MIL-STD-810H（防水防尘防摔）</li>
+                        </ul>
+
+                        <div class="screenshot">
+                            <!-- 🔽 请在此处添加设备图片 -->
+                            <!-- <img src="../images/sonim-device.jpg" alt="Sonim X320 设备图"> -->
+                            <img src="../images/sonim-x320-rf-mouse/XP3-Plus-5G-Features2.webp" alt="Sonim XP3 Plus 5G 设备图">
+                        </div>
+                        <h3>🖱️ 教程目的</h3>
+                        <p>本教程旨在解决 Sonim 按键手机<strong>无法触屏</strong>的情况下，通过安装 RF鼠标 软件，实现用物理按键模拟鼠标操作，从而正常使用各类触屏 App。</p>
+
+                        <h3>📌 适用场景</h3>
+                        <ul>
+                            <li>手机触屏失灵，需要临时或长期使用物理按键操控</li>
+                            <li>需要在 Sonim 按键手机上运行触屏类 App（如微信、抖音等）</li>
+                            <li>希望通过 ADB 命令安装应用并授权无障碍权限</li>
+                        </ul>
+
+                        <!-- ========== 第一章 ========== -->
+                        <h2 id="step1">🔧 二、设置开发者选项</h2>
+                        <p>拨号 <code>*#*#0701#*#*</code> → 打开诊断属性 → 系统设置 → 开发者选项 → 开启USB调试</p>
+
+                        <div class="screenshot-grid">
+                            <div class="screenshot">
+                                <!-- 🔽 步骤1图片 -->
+                                <img src="../images/sonim-x320-rf-mouse/拨号.png" alt="拨号界面">
+                            </div>
+                            <div class="screenshot">
+                                <!-- 🔽 步骤2图片 -->
+                                <img src="../images/sonim-x320-rf-mouse/开启开发者选项.png" alt="开启开发者选项">
+                            </div>
+                            <div class="screenshot">
+                                <!-- 🔽 步骤3图片 -->
+                                <img src="../images/sonim-x320-rf-mouse/开发者选项.png" alt="开发者选项">
+                            </div>
+                            <div class="screenshot">
+                                <!-- 🔽 步骤4图片 -->
+                                <img src="../images/sonim-x320-rf-mouse/USB调试.png" alt="USB调试">
+                            </div>
+                        </div>
+
+                        <!-- ========== 第二章 ========== -->
+                        <h2 id="step2">📦 三、RF鼠标 & 授权工具下载</h2>
+                        <p><strong>官方网站</strong>：<a href="https://github.com/FlowerCat-chen/RFMouse" target="_blank">https://github.com/FlowerCat-chen/RFMouse</a></p>
+                        <p><strong>作者QQ</strong>：3495980692</p>
+
+                        <div class="screenshot">
+                            <!-- 🔽 授权工具下载截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/授权工具下载.png" alt="授权工具下载页面">
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem;">授权工具下载</p>
+                        </div>
+
+                        <div class="screenshot">
+                            <!-- 🔽 安装包下载截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/安装包下载.png" alt="安装包下载">
+                            <img src="../images/sonim-x320-rf-mouse/最新版下载.png" alt="最新安装包下载">
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem;">最新安装包下载</p>
+                        </div>
+
+                        <!-- ========== 第三章 ========== -->
+                        <h2 id="step3">💻 四、RF鼠标安装</h2>
+                        <p>通过 ADB 安装软件包（RF鼠标 APK）</p>
+                        <p><strong>操作步骤：</strong></p>
+                        <ol>
+                            <li>RFMouse-main.ZIP 解压，打开文件夹</li>
+                            <li>进入 adb.exe 目录，右键执行命令行 CMD</li>
+                        </ol>
+
+                        <div class="screenshot">
+                            <!-- 🔽 adb目录截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/解压工具包.png" alt="解压RFMouse工具包">
+                        </div>
+
+                        <h3>手机通过数据线连接电脑：</h3>
+                        <div class="screenshot">
+                            <!-- 🔽 手机连接截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/连接电脑.jpg" alt="手机连接电脑">
+                        </div>
+
+                        <h3>检测是否已连接设备：</h3>
+                        <div class="cmd-block">
+                            <code>adb devices -l</code>
+                        </div>
+                        <div class="screenshot">
+                            <!-- 🔽 adb devices 结果截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/adb设备列表.png" alt="adb devices 设备列表">
+                            <img src="../images/sonim-x320-rf-mouse/adb无设备列表.png" alt="adb devices 无设备">
+                        </div>
+
+                        <div class="note">
+                            <strong>⚠️ 设备列表无设备信息：</strong><br>
+                            手机开发者选项 → 关闭USB调试重新打开，电脑无连接提示检查线缆，切换电脑接口，使用USB-B → Type-C，设备重启等调试方法检查问题！
+                        </div>
+
+                        <h3>安装软件包：</h3>
+                        <div class="cmd-block">
+                            <code>adb install (安装包完整路径)</code>
+
+                        </div>
+                        <p>右键安装包复制完整路径，注意目录不能有空格！</p>
+
+                        <div class="screenshot">
+                            <!-- 🔽 安装命令截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/安装包路径.png" alt="安装包路径复制">
+                            <img src="../images/sonim-x320-rf-mouse/执行命令安装包.png" alt="adb install 执行命令">
+                        </div>
+
+                        <h3>其他常用命令：</h3>
+                        <div class="cmd-block">
+                            <code>adb uninstall 包名</code>
+                        </div>
+                        <div class="cmd-block">
+                            <code>adb shell pm list packages -3</code>
+                        </div>
+                        <p><em>说明：查看已安装的第三方软件列表</em></p>
+
+                        <div class="screenshot">
+                            <!-- 🔽 软件列表截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/手机第三方安装列表.png" alt="第三方应用列表">
+                        </div>
+
+                        <!-- ========== 第四章 ========== -->
+                        <h2 id="step4">🛡️ 五、无障碍及权限授权</h2>
+                        <p><strong>RF鼠标 权限授权：</strong>使用 GitHub 下载的授权工具</p>
+
+                        <div class="screenshot">
+                            <!-- 🔽 授权工具截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/授权工具截图.png" alt="授权工具界面">
+                        </div>
+
+                        <h3>启动服务端：</h3>
+                        <div class="screenshot">
+                            <!-- 🔽 服务端截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/启动服务端.png" alt="启动服务端">
+                        </div>
+
+                        <h3>启动授权端：</h3>
+                        <div class="screenshot">
+                            <!-- 🔽 授权端截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/启动授权端.png" alt="启动授权端">
+                        </div>
+
+                        <h3>授权失败处理：</h3>
+                        <p>如果跟上面显示一样，但 app 没有无障碍权限，可执行下方操作：</p>
+
+                        <div class="screenshot">
+                            <!-- 🔽 授权失败截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/授权失败.png" alt="授权失败提示">
+                        </div>
+
+                        <p><strong>命令行执行：</strong></p>
+                        <div class="cmd-block">
+                            <code>adb shell settings put secure enabled_accessibility_services com.splashtop.sos.sonim/com.splashtop.streamer.addon.AccessibilityInputProvider$CustomAccessibilityService:com.nuance.accessibility/com.nuance.accessibility.MainService</code>
+                        </div>
+
+                        <p><strong>开启无障碍总开关：</strong></p>
+                        <div class="cmd-block">
+                            <code>adb shell settings put secure accessibility_enabled 1</code>
+                        </div>
+
+                        <p><strong>验证是否生效：</strong></p>
+                        <div class="cmd-block">
+                            <code>adb shell settings get secure enabled_accessibility_services</code>
+                        </div>
+
+                        <div class="screenshot">
+                            <!-- 🔽 验证结果截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/adb命令行授权.png" alt="adb命令行授权">
+                        </div>
+
+                        <p>然后<strong>重新执行授权.exe</strong> 开始授权。</p>
+
+                        <!-- ========== 第五章 ========== -->
+                        <h2 id="step5">✅ 六、检查与确认</h2>
+                        <p>打开手机 app，默认所有权限已获取！</p>
+
+                        <div class="screenshot-grid">
+                            <div class="screenshot">
+                                <!-- 🔽 app界面截图1 -->
+                                <img src="../images/sonim-x320-rf-mouse/以获取所有权限.png" alt="已获取所有权限">
+                                <p style="margin-top: 0.5rem; font-size: 0.85rem;">RF鼠标主界面</p>
+                            </div>
+                            <div class="screenshot">
+                                <!-- 🔽 兼容性设置截图 -->
+                                <img src="../images/sonim-x320-rf-mouse/快速按键录入.png" alt="快速按键录入">
+                                <p style="margin-top: 0.5rem; font-size: 0.85rem;">兼容性 → 快速按键录入</p>
+                            </div>
+                        </div>
+
+                        <h3>无法检测识别到按键输入：</h3>
+                        <div class="screenshot">
+                            <!-- 🔽 按键检测失败截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/快速按键录入失败.png" alt="快速按键录入失败">
+                        </div>
+
+                        <h3>RF鼠标应用信息设置：</h3>
+                        <ul>
+                            <li>高级 → 显示在其它应用上层：<strong>已允许</strong></li>
+                            <li>修改系统设置：<strong>已允许</strong></li>
+                        </ul>
+
+                        <div class="screenshot">
+                            <!-- 🔽 应用权限设置截图 -->
+                            <img src="../images/sonim-x320-rf-mouse/其它权限.png" alt="其它权限设置">
+                        </div>
+
+                        <div class="info">
+                            <strong>💡 最后步骤：</strong><br>
+                            设备重启 → 启动 App → 快速按键录入 → 录入成功。<br>
+                            按<strong>切换键</strong>开始使用。
+                        </div>
+
+                        <!-- ========== 注意事项 ========== -->
+                        <h2 id="notice">⚠️ 七、注意事项</h2>
+                        <ol>
+                            <li><strong>备份重要数据</strong>：修改系统设置前建议备份手机重要数据</li>
+                            <li><strong>USB调试保持开启</strong>：授权过程中请勿关闭USB调试</li>
+                            <li><strong>数据线质量</strong>：建议使用原装或高质量数据线，避免连接不稳定</li>
+                            <li><strong>电脑端驱动</strong>：确保电脑已安装手机对应的USB驱动</li>
+                            <li><strong>权限授予</strong>：无障碍权限是RF鼠标正常工作的关键，务必确认已授予</li>
+                        </ol>
+
+                        <div class="warning">
+                            <strong>⚠️ 重要提示：</strong><br>
+                            本教程涉及系统级权限修改，请严格按照步骤操作。如遇问题，可在评论区留言或联系作者QQ：3495980692
+                        </div>
+                    </div>
+
+                    <!-- 相关资源/下载链接 -->
+                    <div style="margin: 2rem 0; padding: 1rem; background-color: #f8f9fa; border-radius: 8px;">
+                        <h3>🔗 相关资源</h3>
+                        <div class="download-links">
+                            <a href="https://github.com/FlowerCat-chen/RFMouse" target="_blank" class="download-btn github">🐙 GitHub项目地址</a>
+                        </div>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">⚠️ 本教程仅供学习交流，请勿用于商业用途。</p>
+                    </div>
+
+                    <!-- Giscus评论区 -->
+                    <div class="comments-section">
+                        <h3>💬 评论区</h3>
+                        <script src="https://giscus.app/client.js"
+                            data-repo="haisi-ai/blogs"
+                            data-repo-id="R_kgDORwBnLg"
+                            data-category="Announcements"
+                            data-category-id="DIC_kwDORwBnLs4C5OQ7"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="preferred_color_scheme"
+                            data-lang="zh-CN"
+                            crossorigin="anonymous"
+                            async>
+                        </script>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <!-- 移动端目录按钮 -->
+    <button class="toc-toggle-btn" id="toc-toggle-btn">📑</button>
+
+    <!-- 移动端遮罩和侧边栏 -->
+    <div class="toc-overlay" id="toc-overlay"></div>
+    <div class="mobile-toc" id="mobile-toc">
+        <button class="close-toc" id="close-toc">✕</button>
+        <h4>📑 本教程目录</h4>
+        <ul class="toc-list" id="mobile-toc-list"></ul>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 DeepSeek | 深度求索 | 让AI触手可及</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://deepseek.com" target="_blank" style="color: var(--primary-color);">官网</a> |
+            <a href="https://github.com/deepseek-ai" target="_blank" style="color: var(--primary-color);">GitHub</a> |
+            邮箱: support@deepseek.com
+        </p>
+    </footer>
+
+    <script>
+        // 生成目录并高亮当前章节
+        (function() {
+            const content = document.getElementById('article-content');
+            if (!content) return;
+
+            const headings = content.querySelectorAll('h2, h3');
+
+            const tocData = [];
+            headings.forEach(heading => {
+                if (!heading.id) {
+                    heading.id = heading.textContent.trim().replace(/\s+/g, '-').replace(/[^\u4e00-\u9fa5a-zA-Z0-9-]/g, '');
+                }
+                const level = heading.tagName.toLowerCase();
+                const title = heading.textContent.trim();
+                const id = heading.id;
+                tocData.push({ level, title, id });
+            });
+
+            const tocList = document.getElementById('toc-list');
+            if (tocList) {
+                tocList.innerHTML = '';
+                tocData.forEach(item => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `#${item.id}`;
+                    a.textContent = item.title;
+                    a.className = `toc-${item.level}`;
+                    li.appendChild(a);
+                    tocList.appendChild(li);
+                });
+            }
+
+            const mobileTocList = document.getElementById('mobile-toc-list');
+            if (mobileTocList) {
+                mobileTocList.innerHTML = '';
+                tocData.forEach(item => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `#${item.id}`;
+                    a.textContent = item.title;
+                    a.className = `toc-${item.level}`;
+                    li.appendChild(a);
+                    mobileTocList.appendChild(li);
+                });
+            }
+
+            const tocLinks = document.querySelectorAll('.toc-list a');
+
+            function updateActiveLink() {
+                const scrollPosition = window.scrollY + 100;
+                let currentId = '';
+                for (let i = headings.length - 1; i >= 0; i--) {
+                    const heading = headings[i];
+                    const offsetTop = heading.offsetTop;
+                    if (scrollPosition >= offsetTop) {
+                        currentId = heading.id;
+                        break;
+                    }
+                }
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+        })();
+
+        // 移动端目录控制
+        const toggleBtn = document.getElementById('toc-toggle-btn');
+        const mobileToc = document.getElementById('mobile-toc');
+        const overlay = document.getElementById('toc-overlay');
+        const closeBtn = document.getElementById('close-toc');
+
+        function openMobileToc() {
+            mobileToc.classList.add('open');
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileToc() {
+            mobileToc.classList.remove('open');
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener('click', openMobileToc);
+        if (closeBtn) closeBtn.addEventListener('click', closeMobileToc);
+        if (overlay) overlay.addEventListener('click', closeMobileToc);
+
+        const mobileLinks = document.querySelectorAll('#mobile-toc-list a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileToc);
+        });
+    </script>
+</body>
+</html>
